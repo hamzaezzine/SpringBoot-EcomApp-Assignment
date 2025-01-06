@@ -1,6 +1,7 @@
-package com.api.EcomApp.repository;
+package com.api.ecomApp.repository;
 
-import com.api.EcomApp.domain.Order;
+
+import com.api.ecomApp.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {

@@ -1,4 +1,4 @@
-package com.api.EcomApp;
+package com.api.ecomApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

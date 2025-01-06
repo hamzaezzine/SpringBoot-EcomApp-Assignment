@@ -1,8 +1,13 @@
-package com.api.EcomApp.model;
+package com.api.ecomApp.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GenerationType;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
