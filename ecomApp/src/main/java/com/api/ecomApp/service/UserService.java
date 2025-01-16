@@ -58,13 +58,11 @@ public class UserService {
         User user = userRepository.findByUsername(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        // Convert Set<Role> to Set<String>
         Set<String> roles = user.getRoles().stream()
                 .map(Role::getName)
                 .collect(Collectors.toSet());
 
         String token = jwtTokenProvider.createToken(user.getUsername(), roles);
-        // Send email with the token (implementation not shown)
     }
 
     public void resetPassword(String token, String newPassword) {

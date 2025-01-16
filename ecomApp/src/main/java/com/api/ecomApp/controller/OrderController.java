@@ -16,28 +16,24 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    // Create Order (USER)
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
         return ResponseEntity.ok(orderService.createOrder(orderDTO));
     }
 
-    // Get All Orders (ADMIN)
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    // Get Orders by User (USER)
     @GetMapping("/user/{userId}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<OrderDTO>> getOrdersByUser(@PathVariable Long userId) {
         return ResponseEntity.ok(orderService.getOrdersByUser(userId));
     }
 
-    // Update Order Status (USER)
     @PutMapping("/{orderId}/status")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<OrderDTO> updateOrderStatus(

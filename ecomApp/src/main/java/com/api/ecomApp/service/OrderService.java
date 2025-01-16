@@ -24,7 +24,6 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    // Create Order
     @Transactional
     public OrderDTO createOrder(OrderDTO orderDTO) {
         User user = userRepository.findById(orderDTO.getUserId())
@@ -32,7 +31,7 @@ public class OrderService {
 
         Order order = new Order();
         order.setUser(user);
-        order.setStatus("PENDING"); // Set default status
+        order.setStatus("PENDING");
 
         List<OrderItem> orderItems = orderDTO.getItems().stream()
                 .map(itemDTO -> {
@@ -52,21 +51,18 @@ public class OrderService {
         return convertToDTO(savedOrder);
     }
 
-    // Get All Orders (ADMIN)
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // Get Orders by User (USER)
     public List<OrderDTO> getOrdersByUser(Long userId) {
         return orderRepository.findByUserId(userId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // Update Order Status (USER)
     public OrderDTO updateOrderStatus(Long orderId, String status) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -76,7 +72,6 @@ public class OrderService {
         return convertToDTO(updatedOrder);
     }
 
-    // Convert Order to DTO
     private OrderDTO convertToDTO(Order order) {
         OrderDTO dto = new OrderDTO();
         dto.setId(order.getId());
@@ -88,7 +83,6 @@ public class OrderService {
         return dto;
     }
 
-    // Convert OrderItem to DTO
     private OrderItemDTO convertToOrderItemDTO(OrderItem item) {
         OrderItemDTO dto = new OrderItemDTO();
         dto.setId(item.getId());

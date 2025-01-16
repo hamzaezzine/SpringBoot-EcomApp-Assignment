@@ -18,7 +18,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    // Create Product
     public ProductDTO createProduct(ProductDTO productDTO) {
         Category category = categoryRepository.findById(productDTO.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -33,21 +32,18 @@ public class ProductService {
         return convertToDTO(savedProduct);
     }
 
-    // Get All Products
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // Get Product by ID
     public ProductDTO getProductById(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
         return convertToDTO(product);
     }
 
-    // Update Product
     public ProductDTO updateProduct(Long productId, ProductDTO productDTO) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
@@ -63,12 +59,10 @@ public class ProductService {
         return convertToDTO(updatedProduct);
     }
 
-    // Delete Product
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
     }
 
-    // Convert Product to DTO
     private ProductDTO convertToDTO(Product product) {
         ProductDTO dto = new ProductDTO();
         dto.setId(product.getId());
